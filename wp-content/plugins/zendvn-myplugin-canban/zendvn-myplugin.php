@@ -7,19 +7,20 @@ Author: ZendVN group
 Version: 1.0
 Author URI: http://www.zend.vn
 */
-register_uninstall_hook(__FILE__, 'zendvn_mp_uninstall');
-
-/*==========================================================
- * Vi du 3
-*==========================================================*/
-function zendvn_mp_uninstall(){
-	global $wpdb;
-	//OPTION API
-	delete_option('zendvn_mp_version');
-	delete_option('zendvn_mp_options');
+class ZendvnMp{
 	
-	$table_name =  $wpdb->prefix . 'zendvn_mp_test';
-	$sql = 'DROP TABLE IF EXISTS ' . $table_name;
-	$wpdb->query($sql);
+	public static function init(){
+		add_action('wp_footer', array(__CLASS__,'newFooter'));
+		add_action('wp_footer', array(__CLASS__,'newFooter2'));
+	}
+	
+	public static function newFooter(){
+		echo '<div>Hello World</div>';
+	}
+	
+	public static function newFooter2(){
+		echo '<div>Hello World 2</div>';
+	}
 	
 }
+ZendvnMp::init();
