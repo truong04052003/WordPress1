@@ -10,22 +10,22 @@ Author URI: http://www.zend.vn
 
 
 
-// class ZendvnMp{
+class ZendvnMp{
 	
-// 	public static function init(){
-// 		echo '<br/>' . __CLASS__;
-// 		add_action('wp_footer', array(__CLASS__,'newFooter'));
-// 		add_action('wp_footer', array(__CLASS__,'newFooter2'));
-// 	}
+	public static function init(){
+		echo '<br/>' . __CLASS__;
+		add_action('wp_footer', array(__CLASS__,'newFooter'));
+		add_action('wp_footer', array(__CLASS__,'newFooter2'));
+	}
 	
-// 	public static function newFooter(){
-// 		echo '<div>Hello World</div>';
-// 	}
+	public static function newFooter(){
+		echo '<div>Hello World</div>';
+	}
 	
-// 	public static function newFooter2(){
-// 		echo '<div>Hello World 2</div>';
-// 	}
+	public static function newFooter2(){
+		echo '<div>Hello World 2</div>';
+	}
 	
-// }
+}
 
-// ZendvnMp::init();
+ZendvnMp::init();
