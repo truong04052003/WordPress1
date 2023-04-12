@@ -30,21 +30,37 @@ class ZendvnMpAdmin
 			array($this, 'main_section_view'),
 			$this->_menuSlug
 		);
-
+		// add tạo ra các phần tử form 
 		add_settings_field(
 			'zendvn_mp_new_title',
 			'Site title',
 			array($this, 'new_title_input'),
 			$this->_menuSlug,
-			$mainSection,
+			$mainSection
 		);
 
+		//EXT SETTING			
+		$extSection = "zendvn_mp_ext_section";
+		add_settings_section(
+			$extSection,
+			"Ext setting",
+			array($this, 'main_section_view'),
+			$this->_menuSlug
+		);
+		// add tạo ra các phần tử form 
 		add_settings_field(
-			'zendvn_mp_logo',
-			'Logo:',
-			array($this, 'logo_input'),
+			'zendvn_mp_slogan',
+			'Slogan',
+			array($this, 'slogan_input'),
 			$this->_menuSlug,
-			$mainSection
+			$extSection
+		);
+		add_settings_field(
+			'zendvn_mp_security_code',
+			'',
+			array($this, 'security_code_input'),
+			$this->_menuSlug,
+			'abc'
 		);
 	}
 	// tạo ra form theo tham số 1 (zendvn_mp_new_title) của add_settings_field 
@@ -53,32 +69,32 @@ class ZendvnMpAdmin
 		echo '<input type="text" name="zendvn_mp_name[zendvn_mp_new_title]" 
 				value="' . $this->_setting_options['zendvn_mp_new_title'] . '"/>';
 	}
-	public function logo_input()
+	// tạo ra form theo tham số 1 (zendvn_mp_new_title_2) của add_settings_field 
+	public function slogan_input()
 	{
-		echo '<input type="file" name="zendvn_mp_logo"/>';
-		if (!empty($this->_setting_options['zendvn_mp_logo'])) {
-			//hiển thị hình ảnh khi upload
-			echo "<br/><br/><img src='" . $this->_setting_options['zendvn_mp_logo'] . "' width='200px' />";
-		}
+		$val = get_option('zendvn_mp_slogan');
+		echo '<input type="text" name="zendvn_mp_slogan" 
+				value="' . $val . '"/>';
+	}
+	public function security_code_input()
+	{
+		echo '<div style="line-height:1.3;font-weight=600;color:#222;">Security code</div>';
+		echo 'This is a security code';
+		echo '<input type="text" name="zendvn_mp_name[zendvn_mp_security_code]" 
+				value=""/>';
 	}
 
-	// upload file ảnh lên 
 	public function validate_setting($data_input)
 	{
-		if (!empty($_FILES['zendvn_mp_logo']['name'])) {
-			if (!empty($this->_setting_options['zendvn_mp_logo_path'])) {
-				// xóa 
-				@unlink($this->_setting_options['zendvn_mp_logo_path']);
+		// echo '<pre>';
+		// print_r($data_input);
+		// echo '</pre>';
+		// echo '<pre>';
+		// print_r($_POST);
+		// echo '</pre>';
+		update_option('zendvn_mp_slogan', $_POST['zendvn_mp_slogan']);
 
-				$override = array('test_form' => false);
-				$fileInfo = wp_handle_upload($_FILES['zendvn_mp_logo'], $override);
-				$data_input['zendvn_mp_logo'] = $fileInfo['url'];
-				$data_input['zendvn_mp_logo_path'] = $fileInfo['file'];
-			}
-		} else {
-			$data_input['zendvn_mp_logo'] = $this->_setting_options['zendvn_mp_logo'];
-			$data_input['zendvn_mp_logo_path'] = $this->_setting_options['zendvn_mp_logo_path'];
-		}
+		// die();
 		return $data_input;
 	}
 
@@ -89,15 +105,7 @@ class ZendvnMpAdmin
 	public function settingMenu()
 	{
 
-		// add_menu_page(
-		// 	'My Setting title',
-		// 	'My Setting',
-		// 	'manage_options',
-		// 	$this->_menuSlug,
-		// 	array($this, 'settingPage')
-		// );
-
-		add_options_page(
+		add_menu_page(
 			'My Setting title',
 			'My Setting',
 			'manage_options',

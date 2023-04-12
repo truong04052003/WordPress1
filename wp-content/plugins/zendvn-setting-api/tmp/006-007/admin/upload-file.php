@@ -56,28 +56,16 @@ class ZendvnMpAdmin
 	public function logo_input()
 	{
 		echo '<input type="file" name="zendvn_mp_logo"/>';
-		if (!empty($this->_setting_options['zendvn_mp_logo'])) {
-			//hiển thị hình ảnh khi upload
-			echo "<br/><br/><img src='" . $this->_setting_options['zendvn_mp_logo'] . "' width='200px' />";
-		}
 	}
 
 	// upload file ảnh lên 
 	public function validate_setting($data_input)
 	{
 		if (!empty($_FILES['zendvn_mp_logo']['name'])) {
-			if (!empty($this->_setting_options['zendvn_mp_logo_path'])) {
-				// xóa 
-				@unlink($this->_setting_options['zendvn_mp_logo_path']);
-
-				$override = array('test_form' => false);
-				$fileInfo = wp_handle_upload($_FILES['zendvn_mp_logo'], $override);
-				$data_input['zendvn_mp_logo'] = $fileInfo['url'];
-				$data_input['zendvn_mp_logo_path'] = $fileInfo['file'];
-			}
-		} else {
-			$data_input['zendvn_mp_logo'] = $this->_setting_options['zendvn_mp_logo'];
-			$data_input['zendvn_mp_logo_path'] = $this->_setting_options['zendvn_mp_logo_path'];
+			echo 'Upload tập tin';
+			$override = array('test_form' => false);
+			$fileInfo = wp_handle_upload($_FILES['zendvn_mp_logo'], $override);
+			$data_input['zendvn_mp_logo'] = $fileInfo['url'];
 		}
 		return $data_input;
 	}
