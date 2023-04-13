@@ -12,26 +12,6 @@ class Zendvn_Mp_Widget_Simple extends WP_Widget {
 		$control_options = array('width'=>'250px');
 		parent::__construct($id_base, $name,$widget_options, $control_options);
 		
-		/* wp_enqueue_style('my_stylesheet',
-						ZENDVN_MP_CSS_URL . '/abc.css',array(),'1.0');
-		
-		$handle = 'my_stylesheet';
-		if (wp_style_is( $handle)) {
-			echo 'ton tai tap tin ' . $handle;
-		} else {
-			echo 'Khong ton tai tap tin ' . $handle;
-		} */
-		
-		/* wp_enqueue_script('zendvn_js123',
-					ZENDVN_MP_JS_URL . '/abc123.js',array('jquery'),'1.0',false);
-		
-		$handle = 'jquery';
-		if (wp_script_is( $handle)) {
-			echo 'ton tai tap tin ' . $handle;
-		} else {
-			echo 'Khong ton tai tap tin ' . $handle;
-		} */
-		
 		if(!empty(is_active_widget(false, false,$id_base,true))){
 			wp_enqueue_style('my_stylesheet',
 							ZENDVN_MP_CSS_URL . '/abc.css',array(),'1.0');
@@ -76,10 +56,7 @@ class Zendvn_Mp_Widget_Simple extends WP_Widget {
 	}
 	
 	public function form( $instance ) {
-		
-			/* echo '<pre>';
-			print_r($instance);
-			echo '</pre>'; */
+
 			$htmlObj =  new ZendvnHtml();
 			
 			//Tao phan tu chua Title
@@ -99,7 +76,7 @@ class Zendvn_Mp_Widget_Simple extends WP_Widget {
 			echo '<p><label for="' . $inputID . '">' . translate('Movie') . '</label>'
 			. $htmlObj->textbox($inputName,$inputValue,$arr)
 			. '</p>';
-			
+
 			//Tao phan tu chua Song
 			$inputID 	= $this->get_field_id('song');
 			$inputName 	= $this->get_field_name('song');

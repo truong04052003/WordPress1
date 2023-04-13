@@ -11,7 +11,7 @@ class Zendvn_Mp_Widget_Simple extends WP_Widget {
 				);
 		$control_options = array('width'=>'250px');
 		parent::__construct($id_base, $name,$widget_options, $control_options);
-	}
+	} 
 	
 	public function widget( $args, $instance ) {
 		

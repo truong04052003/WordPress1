@@ -30,5 +30,9 @@ if(!is_admin()){
 	new ZendvnMp_Widget_Db_Simple();
 	
 }
+add_action("widgets_init",'zendvn_mp_widget_simple');
+function zendvn_mp_widget_simple(){
+	// register_widget('Zendvn_Mp_Widget_Simple');
+}
 
 
