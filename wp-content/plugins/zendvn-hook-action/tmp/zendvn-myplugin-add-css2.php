@@ -16,6 +16,7 @@ function zendvn_mp_footer(){
 add_action('wp_head', 'zendvn_mp_new_css');
 
 function zendvn_mp_new_css(){
+	// nếu có is_page() thì sẽ đưa tập tin css vào 
 	if(is_page() == true){
 		$cssUrl = plugins_url('/css/abc.css',__FILE__);
 		$css = '<link rel="stylesheet" type="text/css" media="all" href="' . $cssUrl . '" />';

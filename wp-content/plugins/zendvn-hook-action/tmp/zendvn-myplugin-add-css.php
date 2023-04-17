@@ -8,6 +8,7 @@ Version: 1.0
 Author URI: http://www.zend.vn
 */
 add_action('wp_head', 'zendvn_mp_new_css');
+//đưa ile css vào link trên header
 function zendvn_mp_new_css(){
 	$cssUrl = plugins_url('/css/abc.css',__FILE__);
 	$css = '<link rel="stylesheet" type="text/css" media="all" href="' . $cssUrl . '" />';
